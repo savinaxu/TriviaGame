@@ -1,49 +1,5 @@
 (function ($) {
-    //start
-    $(".startGame").on("click", function() {
-        $(".container").css("height", "80%")
-        $(".title").css("font-size", "2em")
-        $(".wrapper").hide()
-        $(".content").show()
-        displayQuestion()
-        showQuestion()
-    })
 
-    //show question
-    function showQuestion() {
-        $(".content-question").show()
-    }
-
-    //hide question
-    function hideQuestion() {
-        $(".content-question").hide()
-    }
-
-    //show answer
-    function showAnswer() {
-        $(".content-answer").show()
-    }
-
-    //hide answer
-    function hideanswer() {
-        $("img").remove()
-        $(".content-answer").hide()
-    }
-
-    //show result
-    function showResult() {
-        $(".result").show()
-    }
-
-    //hide result
-    function hideResult() {
-        $(".result").hide()
-    }
-
-    //show time
-    function showTime(time) {
-        $(".second").text(time)
-    }
 
     //questions
     let questions = [
@@ -96,14 +52,61 @@
             rightA: "onLinkClick",
             imgUrl: "assets/images/onevents.png"
         }
-    ]
-    let index = 0
-    let right = 0
-    let wrong = 0
-    let unanswer = 0
-    let questionObj = questions[index]
-    let timeLeft = 15
-    let timeInterval = setInterval(countdown, 1000)
+    ];
+    let index = 0;
+    let right = 0;
+    let wrong = 0;
+    let unanswer = 0;
+    let questionObj;
+    let timeLeft = 15;
+    let timeInterval;
+
+    //start
+    $(".startGame").on("click", function() {
+        timeInterval = setInterval(countdown, 1000)
+        $(".container").css("height", "80%")
+        $(".title").css("font-size", "2em")
+        $(".startGame").hide()
+        $(".content").show()
+        displayQuestion()
+        showQuestion()
+    })
+
+    //show question
+    function showQuestion() {
+        $(".content-question").show()
+    }
+
+    //hide question
+    function hideQuestion() {
+        $(".content-question").hide()
+    }
+
+    //show answer
+    function showAnswer() {
+        $(".content-answer").show()
+    }
+
+    //hide answer
+    function hideanswer() {
+        $("img").remove()
+        $(".content-answer").hide()
+    }
+
+    //show result
+    function showResult() {
+        $(".result").show()
+    }
+
+    //hide result
+    function hideResult() {
+        $(".content-result").hide()
+    }
+
+    //show time
+    function showTime(time) {
+        $(".second").text(time)
+    }
 
     //show questions on the page
     function question(obj) {
@@ -113,6 +116,7 @@
         $(".c").text(obj.c)
     }
     function displayQuestion() {
+        questionObj = questions[index]
         question(questionObj)
     }
 
@@ -153,23 +157,24 @@
     //check done
     function checkDone() {
         let total = right + wrong + unanswer
-        if (total === question.length) return true
+        if (total === questions.length) return true
         else return false
     }
     function isDone() {
         if (checkDone()) {
-            setTimeOut(function() {
+            setTimeout(function() {
                 hideanswer()
                 showResult()
-            }, 2000)
+            }, 1000)
         } else {
             timeLeft = 15
             index++
-            setTimeOut(function() {
+            setTimeout(function() {
+                hideanswer()
                 displayQuestion()
                 showQuestion()
-                setInterval(countdown, 1000)
-            }, 2000)
+                timeInterval = setInterval(countdown, 1000)
+            }, 1000)
         }
     }
 
@@ -178,7 +183,7 @@
         $(".right").text(right)
         $(".wrong").text(wrong)
         $(".unanswer").text(unanswer)
-        $(".result").show()
+        $(".content-result").show()
     }
 
     //set countdown
@@ -215,6 +220,8 @@
 
     //star over
     $(".startOver").on("click", function() {
+        hideResult()
+        timeLeft = 15
         index = 0
         right = 0
         wrong = 0
@@ -222,6 +229,7 @@
         questionObj = questions[index]
         displayQuestion()
         showQuestion()
+        timeInterval = setInterval(countdown, 1000)
     }) 
 
 
