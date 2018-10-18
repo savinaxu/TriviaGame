@@ -1,4 +1,5 @@
 # TriviaGame
+link: https://savinaxu.github.io/TriviaGame/
 # JavaScript Assignment 2
 
 ### Overview
