@@ -93,11 +93,6 @@
         $(".content-answer").hide()
     }
 
-    //show result
-    function showResult() {
-        $(".result").show()
-    }
-
     //hide result
     function hideResult() {
         $(".content-result").hide()
@@ -180,6 +175,8 @@
 
     //show result
     function showResult() {
+        let audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/win.mp3');
+        audio.play()
         $(".right").text(right)
         $(".wrong").text(wrong)
         $(".unanswer").text(unanswer)
@@ -191,6 +188,8 @@
         showTime(timeLeft)
         if (timeLeft === 0) {
             clearInterval(timeInterval)
+            let audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/bad.mp3');
+            audio.play()
             hideQuestion()
             timeOut()
             showAnswer()
@@ -205,12 +204,16 @@
         let isRight = $(this).hasClass(questionObj.right)
         if (isRight) {
             clearInterval(timeInterval)
+            let audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/goodbell.mp3');
+            audio.play()
             hideQuestion()
             rightAnswer()
             showAnswer()
             isDone()
         } else {
             clearInterval(timeInterval)
+            let audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/bad.mp3');
+            audio.play()
             hideQuestion()
             wrongAnswer()
             showAnswer()
