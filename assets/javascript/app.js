@@ -63,6 +63,7 @@
 
     //start
     $(".startGame").on("click", function() {
+        countdown()
         timeInterval = setInterval(countdown, 1000)
         $(".container").css("height", "80%")
         $(".title").css("font-size", "2em")
@@ -160,7 +161,7 @@
             setTimeout(function() {
                 hideanswer()
                 showResult()
-            }, 1000)
+            }, 1500)
         } else {
             timeLeft = 15
             index++
@@ -168,8 +169,9 @@
                 hideanswer()
                 displayQuestion()
                 showQuestion()
+                countdown()
                 timeInterval = setInterval(countdown, 1000)
-            }, 1000)
+            }, 1500)
         }
     }
 
@@ -232,6 +234,7 @@
         questionObj = questions[index]
         displayQuestion()
         showQuestion()
+        countdown()
         timeInterval = setInterval(countdown, 1000)
     }) 
 
